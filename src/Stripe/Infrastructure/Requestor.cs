@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -42,7 +43,7 @@ namespace Stripe
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = method;
 
-            if(!useBearer)
+            if (!useBearer)
                 request.Headers.Add("Authorization", GetAuthorizationHeaderValue(requestOptions.ApiKey));
             else
                 request.Headers.Add("Authorization", GetAuthorizationHeaderValueBearer(requestOptions.ApiKey));
@@ -58,9 +59,9 @@ namespace Stripe
             request.ContentType = "application/x-www-form-urlencoded";
             request.UserAgent = "Stripe.net (https://github.com/jaymedavis/stripe.net)";
 
-    if (request.Method == "POST" && !string.IsNullOrEmpty(postData))
+            if (request.Method == "POST" && !string.IsNullOrEmpty(requestOptions.Data))
             {
-                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+                byte[] byteArray = Encoding.UTF8.GetBytes(requestOptions.Data);
                 request.ContentLength = byteArray.Length;
                 Stream dataStream = request.GetRequestStream();
                 // Write the data to the request stream.
@@ -99,7 +100,7 @@ namespace Stripe
 
                     var stripeError = new StripeError();
 
-                    if(webRequest.RequestUri.ToString().Contains("oauth"))
+                    if (webRequest.RequestUri.ToString().Contains("oauth"))
                         stripeError = Mapper<StripeError>.MapFromJson(ReadStream(webException.Response.GetResponseStream()));
                     else
                         stripeError = Mapper<StripeError>.MapFromJson(ReadStream(webException.Response.GetResponseStream()), "error");
@@ -117,18 +118,18 @@ namespace Stripe
             {
                 return reader.ReadToEnd();
             }
-  }
+        }
 
         public static string PostMultipartFormString(string url, Dictionary<string, string> postData,
          Stream fileToUpload,
          string fileName,
          string fileMimeType,
          string fileFormKey,
-         string apiKey = null)
+         StripeRequestOptions requestOptions)
         {
-            var wr = GetWebRequest(url, "POST", apiKey);
+            var wr = GetWebRequest(url, "POST", requestOptions);
 
-            return ExecuteMultipartFormPostRequest((HttpWebRequest)wr, postData, fileToUpload, fileName, fileMimeType, fileFormKey, apiKey);
+            return ExecuteMultipartFormPostRequest((HttpWebRequest)wr, postData, fileToUpload, fileName, fileMimeType, fileFormKey);
         }
 
         internal static string ExecuteMultipartFormPostRequest(
@@ -137,7 +138,7 @@ namespace Stripe
           Stream fileToUpload,
           string fileNameToUpload,
           string fileMimeType,
-          string fileFormKey, string apiKey = null)
+          string fileFormKey)
         {
             webRequest.ContentType = "application/x-www-form-urlencoded";
             webRequest.KeepAlive = true;

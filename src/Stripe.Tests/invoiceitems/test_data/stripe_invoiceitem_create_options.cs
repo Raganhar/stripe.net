@@ -9,7 +9,7 @@ namespace Stripe.Tests.test_data
             var stripeInvoiceItemCreateOptions = new StripeInvoiceItemCreateOptions()
             {
                 Amount = 1000,
-                Currency = "usd",
+                Currency = "dkk",
                 CustomerId = customerId,
                 Description = "Test Invoice Item",
                 Metadata = new Dictionary<string, string>

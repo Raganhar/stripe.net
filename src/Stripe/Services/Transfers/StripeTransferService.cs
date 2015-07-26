@@ -35,7 +35,7 @@ namespace Stripe
             var url = string.Format("{0}/{1}", Urls.Transfers, transferId);
             url = this.ApplyAllParameters(updateOptions, url, false);
 
-            var response = Requestor.PostString(url, ApiKey);
+            var response = Requestor.PostString(url, new StripeRequestOptions());
 
             return Mapper<StripeTransfer>.MapFromJson(response);
         }

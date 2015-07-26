@@ -38,7 +38,8 @@ namespace Stripe
             var postData = new Dictionary<string, string>();
             postData.Add("purpose", "identity_document");
 
-            var response = Requestor.PostMultipartFormString(Urls.Uploads, postData, file, fileName, MimeType(fileName), "file", ApiKey);
+            var response = Requestor.PostMultipartFormString(Urls.Uploads, postData, file, fileName, MimeType(fileName),
+                "file", new StripeRequestOptions());
 
             return Mapper<StripeDocument>.MapFromJson(response);
         }
@@ -48,7 +49,7 @@ namespace Stripe
             var postData = new Dictionary<string, string>();
             postData.Add("purpose", "dispute_evidence");
 
-            var response = Requestor.PostMultipartFormString(Urls.Uploads, postData, file, fileName, MimeType(fileName), "file", ApiKey);
+            var response = Requestor.PostMultipartFormString(Urls.Uploads, postData, file, fileName, MimeType(fileName), "file", new StripeRequestOptions());
 
             return Mapper<StripeDocument>.MapFromJson(response);
         }
