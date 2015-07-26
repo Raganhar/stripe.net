@@ -21,5 +21,19 @@
 
             return Mapper<StripeDispute>.MapFromJson(response);
         }
+		
+		        public virtual StripeDispute Close(string chargeId)
+        {
+            var url = string.Format("{0}/{1}/dispute/close",Urls.Charges, chargeId);
+            url = this.ApplyAllParameters(null, url, false);
+
+            var response = Requestor.PostString(url, ApiKey);
+
+
+
+
+
+            return Mapper<StripeDispute>.MapFromJson(response);
+        }
     }
 }
