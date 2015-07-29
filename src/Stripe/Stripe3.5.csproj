@@ -96,7 +96,6 @@
     <Compile Include="Infrastructure\ExpandableProperty.cs" />
     <Compile Include="Infrastructure\FileInfoExtensions.cs" />
     <Compile Include="Services\Account\StripeAccountCreateOptions.cs" />
-    <Compile Include="Services\Account\StripeAccountsService.cs" />
     <Compile Include="Services\Account\StripeAccountUpdateOptions.cs" />
     <Compile Include="Services\Balance\StripeBalanceTransactionListOptions.cs" />
     <Compile Include="Services\Disputes\StripeDisputeUpdateOptions.cs" />
@@ -190,6 +189,7 @@
     <Compile Include="Services\Transfers\StripeTransferCreateOptions.cs" />
     <Compile Include="Services\Transfers\StripeTransferService.cs" />
     <Compile Include="Services\Transfers\StripeTransferUpdateOptions.cs" />
+    <Compile Include="SharedAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

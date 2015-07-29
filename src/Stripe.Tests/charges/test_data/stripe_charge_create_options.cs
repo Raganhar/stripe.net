@@ -107,7 +107,7 @@ namespace Stripe.Tests.test_data
             {
                 Amount = 2001,
                 Currency = "usd",
-                Source = new StripeSourceOptions() { TokenId = _tokenId }
+                Source = new StripeSourceOptions() { TokenId = _tokenId },
             };
         }
     }
