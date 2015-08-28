@@ -189,6 +189,7 @@
     <Compile Include="Services\Transfers\StripeTransferCreateOptions.cs" />
     <Compile Include="Services\Transfers\StripeTransferService.cs" />
     <Compile Include="Services\Transfers\StripeTransferUpdateOptions.cs" />
+    <Compile Include="SharedAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

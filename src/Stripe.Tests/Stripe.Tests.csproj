@@ -63,12 +63,15 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="account\account_behaviors.cs" />
+    <Compile Include="account\test_data\stripe_managed_account_create_options.cs" />
+    <Compile Include="account\when_creating_a_managed_account.cs" />
     <Compile Include="account\when_retrieving_an_account.cs" />
     <Compile Include="balance\balance_behaviors.cs" />
     <Compile Include="balance\when_listing_balancetransaction_by_id.cs" />
     <Compile Include="balance\when_listing_balancetransactions.cs" />
     <Compile Include="balance\when_listing_balancetransactions_for_charge.cs" />
     <Compile Include="balance\when_retrieving_a_balance.cs" />
+    <Compile Include="charges\when_creating_a_markedplace_charge_with_a_token.cs" />
     <Compile Include="idempotency\when_creating_a_charge_with_a_card_and_idempotency_key.cs" />
     <Compile Include="charges\charge_behaviors.cs" />
     <Compile Include="charges\when_capturing_a_charge_with_a_card.cs" />

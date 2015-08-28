@@ -113,7 +113,7 @@ namespace Stripe
         [JsonProperty("receipt_number")]
         public string ReceiptNumber { get; set; }
 
-        [JsonIgnore]
+         [JsonProperty("destination")]
         public string Destination { get; set; }
 
         [JsonProperty("application_fee")]
@@ -130,6 +130,7 @@ namespace Stripe
         // todo: hash, shipping
 
         // transfer
+         [JsonProperty("transfer")]
 		   public string TransferId { get; set; }
 
 

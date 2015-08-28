@@ -69,5 +69,9 @@ namespace Stripe.Tests
 
         It should_have_the_correct_source_country = () =>
             StripeCharge.Source.Country.ShouldEqual("US");
+
+        //It should_have_a_transfer_id = () => {
+        //    StripeCharge.TransferId.ShouldNotBeNull(); StripeCharge.TransferId.ShouldNotBeEmpty();
+        //};
     }
 }
