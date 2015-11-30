@@ -79,6 +79,9 @@ namespace Stripe
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("statement_descriptor")]
+        public string StatementDescriptor { get; set; }
+
         [JsonProperty("dispute")]
         public StripeDispute Dispute { get; set; }
 
@@ -119,8 +122,8 @@ namespace Stripe
         [JsonProperty("application_fee")]
         public string ApplicationFee { get; set; }
 
-        [JsonProperty("statement_descriptor")]
-        public string StatementDescriptor { get; set; }
+        //[JsonProperty("statement_descriptor")]
+        //public string StatementDescriptor { get; set; }
         // application_fee
 
         // destination

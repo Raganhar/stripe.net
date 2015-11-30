@@ -1,8 +1,9 @@
-![stripe.net](http://i.imgur.com/9UzKGQd.png)  
-  
-If you would like to donate to help support stripe.net, my paypal address is jaymedavis@gmail.com. It's certainly not required, but I would appreciate it. :)  
-  
-##**If you would like to submit a pull request.**
+## stripe.net
+
+I am no longer using semantic naming in this project. I do not want to have a 17.0 version of stripe.net. From now on, major changes will be a major
+release, and minor changes will be a minor release. If you want to know more, view the [release notes](https://github.com/jaymedavis/stripe.net/releases).
+
+###**If you would like to submit a pull request.**
 First, thank you! It is a lot of work to learn someone else's codebase, so I appreciate it. Here are a few things that would help me out:
 * Do not submit pull requests for more than one fix. Keep them small and focused.
 * Please code review yourself. There are a lot of pull requests with typos and mistakes. Don't worry, we all do it. But a code review of yourself will help. :)
@@ -11,8 +12,7 @@ First, thank you! It is a lot of work to learn someone else's codebase, so I app
 Quick Start
 -----------
 
-It is recommended that you install Stripe.net via NuGet. If you wish to build it yourself via build.cmd, you will need
-ruby installed along with the gems albacore and zip. You could also just build the assembly in Visual Studio by opening the solution and compiling.
+It is recommended that you install Stripe.net via NuGet. If you wish to build it yourself, just run build.cmd.
 
 Add a reference to Stripe.net.dll.
 
@@ -39,10 +39,26 @@ d) In any of the service calls, you can pass a [StripeRequestOptions](#stripereq
 	var planService = new StripePlanService();
 	planService.Get(*planId*, new StripeRequestOptions() { ApiKey = "[your api key here]" });
 
+Stripe Architecture
+-------------------
+Watch the 2 minute video below to get a high level overview of the Stripe Architecture in a .NET project and understand how all the pieces fit together.  
+
+<a href="https://www.youtube.com/watch?v=BQg267TuJ0M&feature=youtu.be&t=7s&related=0" target="_blank">
+<img src="http://i.imgur.com/NBU9pWk.png?1" alt="Stripe .NET Architecture"></img>
+</a>
+
 Stripe API Version
 ------------------
 
-Stripe.net forces a version of the Stripe API for which it was designed. You can find out the latest version supported by viewing StripeConfiguration.cs under the Infrastructure folder.
+stripe.net forces a version of the Stripe API for which it was designed. You can find out the latest version supported by viewing StripeConfiguration.cs under the Infrastructure folder. If you *are not* using Stripe Event objects (which are most commonly used in webhooks) then you need to do nothing for stripe.net to be compatible with the Stripe API.  
+
+If you *are* using Stripe Events then you will need to email Stripe support and ask them to set your API version (you can see this in your Stripe Dashboard) to the one specified in stripe.net's StripeConfiguration.cs file.
+
+See the video below for more information about stripe.net versions and how they correspond with Stripe API versions.
+
+<a href="https://youtu.be/c6dJRc9V_Ls?t=51s&related=0" target="_blank">
+<img src="http://i.imgur.com/eArdtRE.png?1" alt="Stripe API and Stripe.NET Versions"></img>
+</a>
 
 Examples
 ========
@@ -142,9 +158,6 @@ customer or a charge, but only used once.
 	// if you need this...
 	myToken.Card = new StripeCreditCardOptions()
 	{
-		// set this property if using a token
-		TokenId = *tokenId*,
-
 		// set these properties if passing full card details (do not
 		// set these properties if you set TokenId)
 		Number = "4242424242424242",
@@ -195,6 +208,7 @@ a credit card or token, and various meta data.
 
 		// set these properties if passing full card details (do not
 		// set these properties if you set TokenId)
+		Object = "card",
 		Number = "4242424242424242",
 		ExpirationYear = "2022",
 		ExpirationMonth = "10",
@@ -206,7 +220,7 @@ a credit card or token, and various meta data.
 		AddressZip = "27617",                 // optional
 		Name = "Joe Meatballs",               // optional
 		Cvc = "1223"                          // optional
-	}
+	};
 
 	myCustomer.PlanId = *planId*;                          // only if you have a plan
 	myCustomer.TaxPercent = 20;                            // only if you are passing a plan, this tax percent will be added to the price.
@@ -235,6 +249,7 @@ Don't let this be intimidating - all of these fields are optional. You could jus
 
 		// set these properties if passing full card details (do not
 		// set these properties if you set TokenId)
+		Object = "card",
 		Number = "4242424242424242",
 		ExpirationYear = "2022",
 		ExpirationMonth = "10",
@@ -246,7 +261,7 @@ Don't let this be intimidating - all of these fields are optional. You could jus
 		AddressZip = "27617",                 // optional
 		Name = "Joe Meatballs",               // optional
 		Cvc = "1223"                          // optional
-	}
+	};
 
 	// this will set the default card to use for this customer
 	myCustomer.DefaultSource = *cardId*;
@@ -322,6 +337,7 @@ When creating a card you can use either a card or a token
 
 		// set these properties if passing full card details (do not
 		// set these properties if you set TokenId)
+		Object = "card",
 		Number = "4242424242424242",
 		ExpirationYear = "2022",
 		ExpirationMonth = "10",
@@ -333,7 +349,7 @@ When creating a card you can use either a card or a token
 		AddressZip = "27617",                 // optional
 		Name = "Joe Meatballs",               // optional
 		Cvc = "1223"                          // optional
-	}
+	};
 
 	var cardService = new StripeCardService();
 	StripeCard stripeCard = cardService.Create(*customerId*, myCard); // optional isRecipient
@@ -396,6 +412,7 @@ When creating a charge you can use either a card, customer, or a token. Only one
 
 		// set these properties if passing full card details (do not
 		// set these properties if you set TokenId)
+		Object = "card",
 		Number = "4242424242424242",
 		ExpirationYear = "2022",
 		ExpirationMonth = "10",
@@ -407,7 +424,7 @@ When creating a charge you can use either a card, customer, or a token. Only one
 		AddressZip = "27617",                 // optional
 		Name = "Joe Meatballs",               // optional
 		Cvc = "1223"                          // optional
-	}
+	};
 
 	// set this property if using a customer
 	myCharge.CustomerId = *customerId*;
@@ -818,7 +835,7 @@ and access or modify connected accounts depending on permissions.
 valuable service as well, but they are not available in Stripe.net yet.
 
 2) The next thing to do, is have another party connect to your site. To do this, put a link on your site which will start the authorization process, or you can use a 
-[Stripe Connect Button](https://stripe.com/about/resources). Your link will need to contain some querystring paramaters:
+[Stripe Connect Button](https://stripe.com/about/resources). Your link will need to contain some querystring parameters:
 
 	response_type: code
 	client_id:     *your client id from the stripe connect dashboard*

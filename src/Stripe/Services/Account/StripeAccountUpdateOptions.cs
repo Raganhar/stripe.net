@@ -211,7 +211,16 @@ namespace Stripe
         public string OwnerThreeAddressPostalCode { get; set; }
 
         [JsonProperty("legal_entity[additional_owners][2][address][country]")]
-        public string OwnerThreeAddressCountry { get; set; }        
+        public string OwnerThreeAddressCountry { get; set; }
+
+        [JsonProperty("tos_acceptance[ip]")]
+        public string TosIp { get; set; }
+
+        [JsonProperty("tos_acceptance[date]")]
+        public string Date { get; set; }
+
+        [JsonProperty("tos_acceptance[user_agent]")]
+        public string UserAgent { get; set; }        
     }
 
 
