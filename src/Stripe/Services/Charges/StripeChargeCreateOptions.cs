@@ -14,10 +14,22 @@ namespace Stripe
 
         [JsonProperty("customer")]
         public string CustomerId { get; set; }
+<<<<<<< HEAD
    [JsonProperty("card")]
         public string SourceId { get; set; }
         [JsonProperty("source")]
         public StripeSourceOptions Source { get; set; }
+=======
+
+        [JsonProperty("source")]
+        public string Source { get; set; }
+
+        [JsonProperty("card")]
+        public string CardId { get; set; }
+
+        [JsonProperty("card")]
+        public StripeCreditCardOptions Card { get; set; }
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
 
         [JsonProperty("description")]
         public string Description { get; set; }
@@ -40,7 +52,12 @@ namespace Stripe
         [JsonProperty("application_fee")]
         public int? ApplicationFee { get; set; }
 
+<<<<<<< HEAD
         [JsonProperty("shipping")]
         public Dictionary<string, string> Shipping { get; set; }
+=======
+        [JsonProperty("destination")]
+        public string Destination { get; set; }
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
     }
 }

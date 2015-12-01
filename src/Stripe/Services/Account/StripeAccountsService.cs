@@ -1,9 +1,8 @@
 ﻿namespace Stripe
 {
-    public class StripeAccountService : StripeService
+    public class StripeAccountsService : StripeService
     {
-<<<<<<< HEAD
-        public StripeAccountService(string apiKey = null)
+        public StripeAccountsService(string apiKey = null)
             : base(apiKey)
         {
             if (string.IsNullOrEmpty(ApiKey))
@@ -12,47 +11,35 @@
             }
         }
 
-        public virtual StripeAccount Get(StripeRequestOptions requestOptions = null)
-        {
-            requestOptions = SetupRequestOptions(requestOptions);
-
-            var response = Requestor.GetString(Urls.Account, requestOptions);
-
-            return Mapper<StripeAccount>.MapFromJson(response);
-        }
         public virtual StripeAccount Create(StripeAccountCreateOptions createOptions)
         {
             var postData = this.ApplyAllParameters(createOptions, "", false);
 
             //remove the ?
             postData = RemoveQuestionMark(postData);
-
-            var response = Requestor.PostString(Urls.Accounts, new StripeRequestOptions { Data = postData });
+            
+            var response = Requestor.PostData(Urls.Accounts, postData, ApiKey);
 
             return Mapper<StripeAccount>.MapFromJson(response);
-=======
-        public StripeAccountService(string apiKey = null) : base(apiKey)
-        {
->>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
         }
 
         public virtual StripeAccount Get(string id)
         {
             var url = string.Format(Urls.SpecificAccount, id);
-
-            var response = Requestor.GetString(url, new StripeRequestOptions());
+            
+            var response = Requestor.GetString(url, ApiKey);
 
             return Mapper<StripeAccount>.MapFromJson(response);
         }
 
         public virtual StripeAccount Update(string id, StripeAccountUpdateOptions updateOptions)
         {
-            var postData = this.ApplyAllParameters(updateOptions, "", false);
+            var postData = this.ApplyAllParameters(updateOptions, "" ,false);
 
             //remove the ?
             postData = RemoveQuestionMark(postData);
 
-            var response = Requestor.PostString(string.Format(Urls.SpecificAccount, id), new StripeRequestOptions { Data = postData });
+            var response = Requestor.PostData(string.Format(Urls.SpecificAccount, id), postData, ApiKey);
 
             return Mapper<StripeAccount>.MapFromJson(response);
         }

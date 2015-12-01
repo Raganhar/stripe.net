@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+﻿using Newtonsoft.Json;
+=======
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
 using Stripe.Entities;
 
 namespace Stripe
@@ -86,6 +90,9 @@ namespace Stripe
 
         [JsonProperty("publishable")]
         public string Publishable { get; set; }
+<<<<<<< HEAD
+=======
 
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
     }
 }

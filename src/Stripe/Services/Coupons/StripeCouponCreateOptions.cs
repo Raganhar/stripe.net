@@ -33,6 +33,9 @@ namespace Stripe
 
         public DateTime? RedeemBy { get; set; }
 
+        [JsonProperty("metadata")]
+        public Dictionary<string, string> Metadata { get; set; }
+
         [JsonProperty("redeem_by")]
         internal long? RedeemByInternal
         {

@@ -18,6 +18,9 @@ namespace Stripe
         [JsonProperty("business_url")]
         public string BusinessUrl { get; set; }
 
+        [JsonProperty("email")]
+        public string Email { get; set; }
+
         [JsonProperty("statement_descriptor")]
         public string StatementDescriptor { get; set; }
 
@@ -94,7 +97,7 @@ namespace Stripe
         public string LegalEntityVerificationDocument { get; set; }
 
         [JsonProperty("legal_entity[ssn_last_4]")]
-        public int? SSN4 { get; set; }
+        public string SSN4 { get; set; }
 
         [JsonProperty("legal_entity[personal_id_number]")]
         public string LegalEntityPersonalIdNumber { get; set; }
@@ -145,6 +148,9 @@ namespace Stripe
         [JsonProperty("legal_entity[additional_owners][0][address][country]")]
         public string OwnerOneAddressCountry { get; set; }
 
+        [JsonProperty("legal_entity[additional_owners][0][verification][document]")]
+        public string OwnerOneVerificationDocument { get; set; }
+
         //Owner 2
         [JsonProperty("legal_entity[additional_owners][1][dob][day]")]
         public int? OwnerTwoLegalEntityDobDay { get; set; }
@@ -178,6 +184,9 @@ namespace Stripe
 
         [JsonProperty("legal_entity[additional_owners][1][address][country]")]
         public string OwnerTwoAddressCountry { get; set; }
+
+        [JsonProperty("legal_entity[additional_owners][1][verification][document]")]
+        public string OwnerTwoVerificationDocument { get; set; }
         
         //Owner 3 
         [JsonProperty("legal_entity[additional_owners][2][dob][day]")]
@@ -221,7 +230,8 @@ namespace Stripe
 
         [JsonProperty("tos_acceptance[user_agent]")]
         public string UserAgent { get; set; }        
+
+        [JsonProperty("legal_entity[additional_owners][2][verification][document]")]
+        public string OwnerThreeVerificationDocument { get; set; }
     }
-
-
 }

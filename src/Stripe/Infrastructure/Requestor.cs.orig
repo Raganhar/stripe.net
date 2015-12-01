@@ -15,6 +15,9 @@ namespace Stripe
             return ExecuteWebRequest(wr);
         }
 
+<<<<<<< HEAD
+        public static string PostString(string url, StripeRequestOptions requestOptions)
+=======
         public static string PostData(string url, string data, string apiKey = null)
         {
             var wr = GetWebRequest(url, "POST", apiKey, postData:data);
@@ -24,6 +27,7 @@ namespace Stripe
 
 
         public static string PostString(string url, string apiKey = null)
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
         {
             var wr = GetWebRequest(url, "POST", requestOptions);
 
@@ -44,7 +48,11 @@ namespace Stripe
             return ExecuteWebRequest(wr);
         }
 
+<<<<<<< HEAD
         internal static WebRequest GetWebRequest(string url, string method, StripeRequestOptions requestOptions, bool useBearer = false)
+=======
+        internal static WebRequest GetWebRequest(string url, string method, string apiKey = null, bool useBearer = false, string postData = "")
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
         {
             requestOptions.ApiKey = requestOptions.ApiKey ?? StripeConfiguration.GetApiKey();
 
@@ -54,7 +62,11 @@ namespace Stripe
             request.Method = method;
 
             if (!useBearer)
+<<<<<<< HEAD
                 request.Headers.Add("Authorization", GetAuthorizationHeaderValue(requestOptions.ApiKey));
+=======
+                request.Headers.Add("Authorization", GetAuthorizationHeaderValue(apiKey));
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
             else
                 request.Headers.Add("Authorization", GetAuthorizationHeaderValueBearer(requestOptions.ApiKey));
 
@@ -69,9 +81,15 @@ namespace Stripe
             request.ContentType = "application/x-www-form-urlencoded";
             request.UserAgent = "Stripe.net (https://github.com/jaymedavis/stripe.net)";
 
+<<<<<<< HEAD
             if (request.Method == "POST" && !string.IsNullOrEmpty(requestOptions.Data))
             {
                 byte[] byteArray = Encoding.UTF8.GetBytes(requestOptions.Data);
+=======
+            if (request.Method == "POST" && !string.IsNullOrEmpty(postData))
+            {
+                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
                 request.ContentLength = byteArray.Length;
                 Stream dataStream = request.GetRequestStream();
                 // Write the data to the request stream.
@@ -79,6 +97,10 @@ namespace Stripe
                 // Close the Stream object.
                 dataStream.Close();
             }
+<<<<<<< HEAD
+=======
+            
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
             return request;
         }
 
@@ -135,11 +157,19 @@ namespace Stripe
          string fileName,
          string fileMimeType,
          string fileFormKey,
+<<<<<<< HEAD
          StripeRequestOptions requestOptions)
         {
             var wr = GetWebRequest(url, "POST", requestOptions);
 
             return ExecuteMultipartFormPostRequest((HttpWebRequest)wr, postData, fileToUpload, fileName, fileMimeType, fileFormKey);
+=======
+         string apiKey = null)
+        {
+            var wr = GetWebRequest(url, "POST", apiKey);
+
+            return ExecuteMultipartFormPostRequest((HttpWebRequest)wr, postData, fileToUpload, fileName, fileMimeType, fileFormKey, apiKey);
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
         }
 
         internal static string ExecuteMultipartFormPostRequest(
@@ -148,7 +178,11 @@ namespace Stripe
           Stream fileToUpload,
           string fileNameToUpload,
           string fileMimeType,
+<<<<<<< HEAD
           string fileFormKey)
+=======
+          string fileFormKey, string apiKey = null)
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
         {
             webRequest.ContentType = "application/x-www-form-urlencoded";
             webRequest.KeepAlive = true;
@@ -193,6 +227,10 @@ namespace Stripe
 
                 throw;
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
         }
     }
 }

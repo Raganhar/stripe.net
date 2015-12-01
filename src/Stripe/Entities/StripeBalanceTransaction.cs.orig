@@ -44,9 +44,14 @@ namespace Stripe
 
         [JsonProperty("source")]
         public string Source { get; set; }
+<<<<<<< HEAD
+       [JsonProperty("sourced_transfers")]
+        public StripeList<StripeTransfer> SourcedTransfers { get; set; }
+=======
 
         [JsonProperty("sourced_transfers")]
         public StripeList<StripeTransfer> SourcedTransfers { get; set; }
 
+>>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
     }
 }
