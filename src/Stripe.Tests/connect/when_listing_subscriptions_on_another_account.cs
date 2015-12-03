@@ -15,8 +15,8 @@ namespace Stripe.Tests
     ")]
     public class when_listing_subscriptions_on_another_account
     {
-        private static string _connectedAccountId = "acct_****";
-        private static string _connectedAccountCustomerId = "cus_****";
+        private static string _connectedAccountId = "acct_16StqLKC3PIe4O1c";
+        private static string _connectedAccountCustomerId = "cus_7T0eNizrC4KKtA";
 
         private static List<StripeSubscription> _stripeSubscriptionList;
         private static StripeSubscriptionService _stripeSubscriptionService;
@@ -32,5 +32,28 @@ namespace Stripe.Tests
 
         It should_have_at_lest_one_subscription = () =>
             _stripeSubscriptionList.Count().ShouldBeGreaterThanOrEqualTo(1);
+    }
+
+
+    public class when_listing_subscriptions_on_another_account_bob
+    {
+        private static string _connectedAccountId = "acct_16StqLKC3PIe4O1c";
+        private static string _connectedAccountCustomerId = "cus_7T0eNizrC4KKtA";
+
+        private static StripeSubscription _stripeSubscriptionList;
+        private static StripeSubscriptionService _stripeSubscriptionService;
+        private static string sourceId = "tok_17E4z8Dr3WxIQrlXR4ARFuLc";
+        Establish context = () =>
+            _stripeSubscriptionService = new StripeSubscriptionService();
+
+        Because of = () =>
+        {
+            var requestOptions = new StripeSubscriptionCreateOptions { PlanId = "Renting stuff 8izFjUsw3U6dQyFw5_CLAg", Card = new StripeCreditCardOptions { TokenId = sourceId } };
+            var op = new StripeRequestOptions { StripeConnectAccountId = _connectedAccountId };
+            _stripeSubscriptionList = _stripeSubscriptionService.Create(_connectedAccountCustomerId, requestOptions, op);
+        };
+
+        private It shouldHaveCreatedASubscription = () =>
+            _stripeSubscriptionList.ShouldNotBeNull();
     }
 }

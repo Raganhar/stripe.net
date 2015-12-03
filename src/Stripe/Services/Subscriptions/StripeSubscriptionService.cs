@@ -21,13 +21,13 @@ namespace Stripe
             return Mapper<StripeSubscription>.MapFromJson(response);
         }
 
-        public virtual StripeSubscription Create(string customerId, string planId, StripeSubscriptionCreateOptions createOptions = null, StripeRequestOptions requestOptions = null)
+        public virtual StripeSubscription Create(string customerId, StripeSubscriptionCreateOptions createOptions, StripeRequestOptions requestOptions = null)
         {
             requestOptions = SetupRequestOptions(requestOptions);
 
             var url = string.Format(Urls.Subscriptions, customerId);
             url = this.ApplyAllParameters(createOptions, url, false);
-            url = ParameterBuilder.ApplyParameterToUrl(url, "plan", planId);
+            url = ParameterBuilder.ApplyParameterToUrl(url, "plan", createOptions.PlanId);
 
             var response = Requestor.PostString(url, requestOptions);
 

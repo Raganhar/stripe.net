@@ -40,11 +40,5 @@ namespace Stripe
 
         [JsonProperty("account")]
         public string Account { get; set; }
-
-        [JsonProperty("default_for_currency")]
-        public string DefaultForCurrency { get; set; }
-
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata { get; set; }
     }
 }

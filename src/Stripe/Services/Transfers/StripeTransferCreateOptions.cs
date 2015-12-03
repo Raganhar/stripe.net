@@ -11,14 +11,9 @@ namespace Stripe
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
-<<<<<<< HEAD
-    [JsonProperty("destination")]
-        public string Destination { get; set; }
-=======
         [JsonProperty("destination")]
         public string Destination { get; set; }
 
->>>>>>> ed98b36b7c5fe636072e53fe395c6a80be64347d
         [JsonProperty("recipient")]
         public string Recipient { get; set; }
 

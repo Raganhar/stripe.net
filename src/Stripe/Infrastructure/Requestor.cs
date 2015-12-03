@@ -8,6 +8,12 @@ namespace Stripe
 {
     internal static class Requestor
     {
+        public static string GetString(string url, string apiKey = null)
+        {
+            var wr = GetWebRequest(url, "GET", new StripeRequestOptions { ApiKey = apiKey });
+
+            return ExecuteWebRequest(wr);
+        }
         public static string GetString(string url, StripeRequestOptions requestOptions)
         {
             var wr = GetWebRequest(url, "GET", requestOptions);
@@ -17,19 +23,30 @@ namespace Stripe
 
         public static string PostData(string url, string data, string apiKey = null)
         {
-            var wr = GetWebRequest(url, "POST", apiKey, postData:data);
+            var wr = GetWebRequest(url, "POST", new StripeRequestOptions {ApiKey = apiKey, Data = data});
 
             return ExecuteWebRequest(wr);
         }
 
-
-        public static string PostString(string url, string apiKey = null)
+        public static string PostString(string url, StripeRequestOptions requestOptions)
         {
             var wr = GetWebRequest(url, "POST", requestOptions);
 
             return ExecuteWebRequest(wr);
         }
 
+        public static string PostString(string url, string apiKey = null)
+        {
+            var wr = GetWebRequest(url, "POST", new StripeRequestOptions { ApiKey = apiKey });
+
+            return ExecuteWebRequest(wr);
+        }
+        public static string Delete(string url, string apiKey = null)
+        {
+            var wr = GetWebRequest(url, "DELETE", new StripeRequestOptions { ApiKey = apiKey });
+
+            return ExecuteWebRequest(wr);
+        }
         public static string Delete(string url, StripeRequestOptions requestOptions)
         {
             var wr = GetWebRequest(url, "DELETE", requestOptions);
